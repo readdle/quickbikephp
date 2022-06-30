@@ -1,0 +1,40 @@
+<?php
+//this is a generated file, edit config.*.php instead
+//sig:{"three-nv-file":"31-1656337251","config.test.php":"792-1656337342","config.parent.php":"118-1656515534"}
+declare(strict_types=1);
+namespace Readdle\QuickBike\Config;
+
+class GeneratedRuntimeConfig
+{
+    public const INT_KEY = 123;
+    public const BOOL_KEY = true;
+    public const STRING_KEY = 'This is a test! \' "test"';
+    public const ARRAY_LIST_KEY_ONE = [1, 2, 3, 4];
+    public const ARRAY_LIST_KEY_TWO = [
+        1,
+        ['test', 'another test', 'something else', 'completely different test', 'omg test test test'],
+        3,
+        4,
+    ];
+    public const ARRAY_LIST_KEY_THREE = [
+        ['test' => false, 'omg' => true],
+        ['test' => false, 'omg' => true],
+        ['test' => false, 'omg' => true],
+    ];
+    public const ARRAY_DICT_KEY_ONE = [
+        'int_key'         => 123,
+        'bool_key'        => false,
+        'string_key'      => 'this is a test"',
+        'array_list_key'  => [1, 2, 3],
+    ];
+    public const ARRAY_DICT_KEY_TWO = [
+        'int_key'   => 123,
+        'dict_key'  => [
+            'int_key'   => 123,
+            'dict_key'  => [['int_key' => 123, 'dict_key' => ['key' => 'value']]],
+        ],
+    ];
+    public const ARRAY_DICT_KEY_THREE = [
+        'very-very-very-very-very-very-very-very-long-key'  => 'very-very-very-very-very-very-very-very-long-value',
+    ];
+}

@@ -1,0 +1,54 @@
+{
+    "name": "readdle/quickbikephp",
+    "description": "QuickBike Framework",
+    "type": "library",
+    "license": "MIT",
+    "php": ">=8.1",
+    "autoload": {
+        "psr-4": {
+            "Readdle\\QuickBike\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Readdle\\QuickBike\\Test\\": "tests/"
+        },
+        "classmap": [
+            "config/CodeConfig.php",
+            "config/generated/GeneratedRuntimeConfig.php"
+        ]
+    },
+    "require": {
+        "symfony/http-foundation": "^6.0",
+        "readdle/fqdb": "^4.1",
+        "pmjones/auto-route": "^2.1",
+        "ext-pdo": "*",
+        "monolog/monolog": "^2.6",
+        "3ncr/tokencrypt-php": "^1.0",
+        "twig/twig": "^3.4",
+        "psr/container": "^2."
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "phpunit/phpunit": "^9.5",
+        "phpstan/phpstan": "^1.8",
+        "jetbrains/phpstorm-attributes": "^1.0"
+    },
+    "scripts": {
+        "lint-autofix": [
+            "php-cs-fixer fix"
+        ],
+        "lint": [
+            "php-cs-fixer fix --dry-run"
+        ],
+        "test" : [ 
+            "phpunit"
+        ],
+        "phpstan": "phpstan",
+        "ci": [
+            "@lint",
+            "@test",
+            "@phpstan"
+        ]
+    }
+}

@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: src/Core/DefaultServices.php
+
+		-
+			message: "#^If condition is always false\\.$#"
+			count: 1
+			path: src/Core/Templates.php
