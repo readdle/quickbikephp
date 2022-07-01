@@ -58,17 +58,49 @@ class ValueExpander
         return $decoded;
     }
 
-    private static function loadFile(string $relativeOrAbsolutePath): string
+    private static function loadFileAtAbsolutePath(string $absolutePath): string|false
     {
-        $oldCwd = getcwd();
-        chdir(Path::root('config'));
-        if (file_exists($relativeOrAbsolutePath)) {
-            $content = trim(file_get_contents($relativeOrAbsolutePath));
-            chdir($oldCwd);
-            return $content;
+        if (file_exists($absolutePath)) {
+            $data = file_get_contents($absolutePath);
+            if ($data === false) {
+                return self::FILE_NOT_EXISTS_ERROR;
+            }
+            return trim($data);
+        }
+        return self::FILE_NOT_EXISTS_ERROR;
+    }
+
+    private static function resolvePathRelativeToConfig(string $path): string
+    {
+        if (str_starts_with($path, '/')) {
+            return $path; // absolute path, UNIX
         }
 
+        $noSlashes = !str_contains($path, '/');
+
+        // trivial paths like ./test.config
+        if (str_starts_with($path, './')) {
+            $restPath = substr($path, 2);
+            if (!str_contains($restPath, '/')) {
+                $path = $restPath;
+                $noSlashes = true;
+            }
+        }
+
+        if ($noSlashes) {
+            return Path::root('config', $path);
+        }
+
+        $oldCwd = getcwd();
+        chdir(Path::root('config'));
+        $absolutePath = realpath($path);
         chdir($oldCwd);
-        return self::FILE_NOT_EXISTS_ERROR;
+
+        return $absolutePath;
+    }
+
+    private static function loadFile(string $relativeOrAbsolutePath): string
+    {
+        return self::loadFileAtAbsolutePath(self::resolvePathRelativeToConfig($relativeOrAbsolutePath));
     }
 }
