@@ -31,6 +31,10 @@ class ConfigValueExpanderTest extends TestCase
 
         $expanded = ValueExpander::expandValue('%file(not_exists)%');
         $this->assertEquals('expansion error: file not exists', $expanded);
+
+        $exArray = ValueExpander::expandValue('%json_file(../composer.json)%');
+        $this->assertArrayHasKey('description', $exArray);
+        $this->assertArrayHasKey('autoload', $exArray);
     }
 
 

@@ -12,7 +12,7 @@ class ValueExpander
     private const UNSUPPORTED_OPERATOR = 'expansion error: unsupported operator';
 
 
-    public static function expandValue(string $value): string
+    public static function expandValue(string $value): mixed
     {
         $fileValue = self::expandFileValue($value);
         if ($fileValue !== $value) {
@@ -30,7 +30,11 @@ class ValueExpander
         }, $value);
     }
 
-    protected static function expandFileValue(string $value): string
+    /**
+     * @param string $value
+     * @return mixed could return anything, because of json_file
+     */
+    protected static function expandFileValue(string $value): mixed
     {
         if (preg_match('/^%(file|json_file)\(([A-Z\da-z_.\/\-]+)\)%$/', $value, $m)) {
             $op = $m[1];
@@ -58,7 +62,7 @@ class ValueExpander
         return $decoded;
     }
 
-    private static function loadFileAtAbsolutePath(string $absolutePath): string|false
+    private static function loadFileAtAbsolutePath(string $absolutePath): string
     {
         if (file_exists($absolutePath)) {
             $data = file_get_contents($absolutePath);
