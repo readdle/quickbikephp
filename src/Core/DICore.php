@@ -3,20 +3,16 @@ declare(strict_types=1);
 
 namespace Readdle\QuickBike\Core;
 
-use Monolog\Logger;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Psr\Log\LoggerInterface;
 use Readdle\QuickBike\Config\CodeConfig;
 use Readdle\QuickBike\Config\GeneratedRuntimeConfig;
 use Readdle\QuickBike\Core\Exception\ConfigBuilderException;
 use Readdle\QuickBike\Core\Exception\DIException;
 use ReflectionClass;
 use ReflectionException;
-use ReflectionUnionType;
 
-/** @internal  */
 class DICore
 {
 

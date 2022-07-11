@@ -16,8 +16,10 @@ class ConfigValueExpanderTest extends TestCase
         putenv('ENV1=test');
         putenv('OTHER_ENV=12345');
 
-        $expanded = ValueExpander::expandValue('%env(ENV1)%-%env(OTHER_ENV)%');
+        $this->assertEquals('test', ValueExpander::expandValue('%env(ENV1)%'));
+        $this->assertEquals('12345', ValueExpander::expandValue('%env(OTHER_ENV)%'));
 
+        $expanded = ValueExpander::expandValue('%env(ENV1)%-%env(OTHER_ENV)%');
         $this->assertEquals('test-12345', $expanded);
 
         putenv('ENV1');

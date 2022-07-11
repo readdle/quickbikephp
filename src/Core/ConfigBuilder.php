@@ -46,7 +46,7 @@ class ConfigBuilder
             throw new \LogicException('GeneratedRuntimeConfig was loaded before generating class');
         }
 
-        $checker = new CacheChecker($this->runtimeConfigPath);
+        $checker = new CacheChecker($this->runtimeConfigPath, $this->f3nv, $this->configDir);
         if (!$checker->checkIfConfigActual()) {
             $this->generate();
         }
