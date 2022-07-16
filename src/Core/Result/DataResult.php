@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Readdle\QuickBike\Core\Result;
 
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\Response;
 
 class DataResult implements ResultInterface
 {
@@ -38,5 +40,10 @@ class DataResult implements ResultInterface
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function createResponse(): Response
+    {
+        return new Response($this->text, $this->statusCode, $this->headers);
     }
 }

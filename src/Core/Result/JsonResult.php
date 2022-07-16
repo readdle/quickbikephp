@@ -1,6 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Readdle\QuickBike\Core\Result;
+
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class JsonResult implements ResultInterface
 {
@@ -30,5 +34,10 @@ class JsonResult implements ResultInterface
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function createResponse(): Response
+    {
+        return new JsonResponse($this->getData(), $this->getStatusCode(), $this->getHeaders());
     }
 }

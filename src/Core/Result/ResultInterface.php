@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
 namespace Readdle\QuickBike\Core\Result;
+
+use Symfony\Component\HttpFoundation\Response;
 
 interface ResultInterface
 {
@@ -14,4 +17,7 @@ interface ResultInterface
      * @return array<string, mixed>
      */
     public function getHeaders(): array;
+
+
+    public function createResponse(): Response;
 }

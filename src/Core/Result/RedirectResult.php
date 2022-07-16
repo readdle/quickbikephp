@@ -1,8 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Readdle\QuickBike\Core\Result;
 
 use JetBrains\PhpStorm\ArrayShape;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class RedirectResult implements ResultInterface
 {
@@ -32,5 +35,10 @@ class RedirectResult implements ResultInterface
     public function getHeaders(): array
     {
         return $this->headers;
+    }
+
+    public function createResponse(): Response
+    {
+        return new RedirectResponse($this->url, $this->statusCode, $this->headers);
     }
 }

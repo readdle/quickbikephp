@@ -23,4 +23,19 @@ class EngineTest extends TestCase
         $this->assertEquals('Hello World', $response->getContent());
         putenv('QUICKBIKE_NO_CONFIG_UPDATE');
     }
+
+
+    public function testJsonGet(): void
+    {
+        putenv('QUICKBIKE_NO_CONFIG_UPDATE=1');
+
+        $di = new DICore();
+        $engine = new Engine($di);
+        $request = Request::create('/json');
+
+        $response = $engine->generateResponseForRequest($request);
+
+        $this->assertEquals('{"text":"Hello World"}', $response->getContent());
+        putenv('QUICKBIKE_NO_CONFIG_UPDATE');
+    }
 }
