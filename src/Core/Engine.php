@@ -27,7 +27,7 @@ class Engine
      * @throws NotFoundExceptionInterface
      */
     final public function __construct(
-        private readonly DICore $di
+        protected readonly DICore $di
     ) {
         $logger = $this->di->get(LoggerInterface::class);
         if ($logger instanceof LoggerInterface) {
