@@ -15,7 +15,7 @@ class TemplateResult implements ResultInterface
 
     /**
      * @param string $templateName
-     * @param array<string, string> $data
+     * @param array<string, mixed> $data
      * @param int $statusCode
      * @param array<string, mixed> $headers
      */
@@ -28,7 +28,7 @@ class TemplateResult implements ResultInterface
     }
 
     /**
-     * @return array<string, string>
+     * @return array<string, mixed>
      */
     public function getData(): array
     {
@@ -60,5 +60,15 @@ class TemplateResult implements ResultInterface
         }
 
         return self::$templates->render($this->templateName, $this->data, $this->statusCode, $this->headers);
+    }
+
+    public function appendingHeaders(array $headers): TemplateResult
+    {
+        return $this->replacingHeaders(array_merge($this->headers, $headers));
+    }
+
+    public function replacingHeaders(array $headers): TemplateResult
+    {
+        return new TemplateResult($this->templateName, $this->data, $this->statusCode, $headers);
     }
 }

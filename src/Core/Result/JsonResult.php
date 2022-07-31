@@ -40,4 +40,14 @@ class JsonResult implements ResultInterface
     {
         return new JsonResponse($this->getData(), $this->getStatusCode(), $this->getHeaders());
     }
+
+    public function appendingHeaders(array $headers): JsonResult
+    {
+        return $this->replacingHeaders(array_merge($this->headers, $headers));
+    }
+
+    public function replacingHeaders(array $headers): JsonResult
+    {
+        return new JsonResult($this->data, $this->statusCode, $headers);
+    }
 }

@@ -18,6 +18,17 @@ interface ResultInterface
      */
     public function getHeaders(): array;
 
+    /**
+     * @param array<string, mixed> $headers
+     * @return $this
+     */
+    public function appendingHeaders(array $headers): self;
+
+    /**
+     * @param array<string, mixed> $headers
+     * @return $this
+     */
+    public function replacingHeaders(array $headers): self;
 
     public function createResponse(): Response;
 }

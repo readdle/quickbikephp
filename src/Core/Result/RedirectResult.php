@@ -41,4 +41,14 @@ class RedirectResult implements ResultInterface
     {
         return new RedirectResponse($this->url, $this->statusCode, $this->headers);
     }
+
+    public function appendingHeaders(array $headers): RedirectResult
+    {
+        return $this->replacingHeaders(array_merge($this->headers, $headers));
+    }
+
+    public function replacingHeaders(array $headers): RedirectResult
+    {
+        return new RedirectResult($this->url, $this->statusCode, $headers);
+    }
 }

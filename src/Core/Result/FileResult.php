@@ -16,7 +16,7 @@ class FileResult implements ResultInterface
      * @param ?string $contentDisposition
      */
     public function __construct(
-        public string $fileName,
+        public readonly string $fileName,
         public readonly array $headers = [],
         public readonly ?string $contentDisposition = null
     ) {
@@ -53,5 +53,15 @@ class FileResult implements ResultInterface
             true,
             $this->contentDisposition
         );
+    }
+
+    public function appendingHeaders(array $headers): FileResult
+    {
+        return $this->replacingHeaders(array_merge($this->headers, $headers));
+    }
+
+    public function replacingHeaders(array $headers): FileResult
+    {
+        return new FileResult($this->fileName, $headers, $this->contentDisposition);
     }
 }

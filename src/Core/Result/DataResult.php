@@ -46,4 +46,14 @@ class DataResult implements ResultInterface
     {
         return new Response($this->text, $this->statusCode, $this->headers);
     }
+
+    public function appendingHeaders(array $headers): DataResult
+    {
+        return $this->replacingHeaders(array_merge($this->headers, $headers));
+    }
+
+    public function replacingHeaders(array $headers): DataResult
+    {
+        return new DataResult($this->text, $this->statusCode, $headers);
+    }
 }
